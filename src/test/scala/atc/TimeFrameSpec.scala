@@ -51,8 +51,8 @@ class TimeFrameSpec extends FunSpec with Matchers {
     }
   }
 
-  describe("TimeFrame.convertToSubFrames") {
-    it("returns a list of lists, each list is the first N TimeFrames") {
+  describe("TimeFrame.convertToSubFramesWithSize") {
+    it("returns a list of lists, each list is a sub TimeFrames the first N TimeFrames") {
       val timeFrames = List(
         TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 5, 0), 5),
         TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 5, 30), 0),
@@ -70,17 +70,10 @@ class TimeFrameSpec extends FunSpec with Matchers {
           TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 5, 30), 0),
           TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 6, 0), 10),
           TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 6, 30), 20)
-        ),
-        List(
-          TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 6, 0), 10),
-          TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 6, 30), 20)
-        ),
-        List(
-          TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 6, 30), 20)
         )
       )
 
-      TimeFrame.convertToSubFrames(timeFrames, 3) should be(expected)
+      TimeFrame.convertToSubFramesWithSize(timeFrames, 3) should be(expected)
     }
   }
 }

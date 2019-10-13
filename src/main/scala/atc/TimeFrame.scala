@@ -10,6 +10,7 @@ object TimeFrame {
 
   /**
    * Return true if the list of TimeFrames is contiguous
+   *
    * @param timeFrames
    * @return
    */
@@ -24,15 +25,20 @@ object TimeFrame {
   }
 
   /**
-   * Convert a list of time frames to a list of list of TimeFrames, each list element is a sub list of the first N
-   * TimeFrames of the TimeFrame list
+   * Convert a list of time frames to a list of sub TimeFrames, each sub TimeFrames has exact subFramesSize of
+   * TimeFrames from the timeFrames param
+   *
    * @param timeFrames
-   * @param subFrameSize
+   * @param subFramesSize
    * @return
    */
-  def convertToSubFrames(timeFrames: List[TimeFrame], subFrameSize: Int): List[List[TimeFrame]] = timeFrames match {
-    case _ :: tail => timeFrames.take(subFrameSize) :: convertToSubFrames(tail, subFrameSize)
-    case Nil => List.empty[List[TimeFrame]]
+  def convertToSubFramesWithSize(timeFrames: List[TimeFrame], subFramesSize: Int): List[List[TimeFrame]] = {
+    val subFrames = timeFrames match {
+      case _ :: tail => timeFrames.take(subFramesSize) :: convertToSubFramesWithSize(tail, subFramesSize)
+      case Nil => List.empty[List[TimeFrame]]
+    }
+
+    subFrames.filter(_.length == subFramesSize)
   }
 
 }
