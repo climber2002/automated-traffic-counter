@@ -15,6 +15,6 @@ object Statistics {
   def contiguousFramesWithLeastCars(timeFrames: List[TimeFrame], framesCount: Int): List[TimeFrame] =
     TimeFrame.convertToSubFramesOfSize(timeFrames, framesCount)
       .filter(TimeFrame.isContiguous(_))
-      .sortBy(subFrames => totalNumberOfCars(subFrames))
+      .sortBy(totalNumberOfCars(_))
       .head
 }
