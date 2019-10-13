@@ -1,6 +1,6 @@
 package atc
 
-import java.time.{LocalDateTime, Month}
+import java.time.{LocalDate, LocalDateTime, Month}
 
 import org.scalatest.{FunSpec, Matchers}
 
@@ -28,6 +28,21 @@ class StatisticsSpec extends FunSpec with Matchers {
 
     it("should return 0 for empty list") {
       Statistics.totalNumberOfCars(List.empty) should be(0)
+    }
+  }
+
+  describe("totalNumberOfCarsByDate") {
+    it("should group the total number of cars by date") {
+      val expected = List(
+        (LocalDate.of(2016, Month.DECEMBER, 1), 15 + 25 + 46 + 42),
+        (LocalDate.of(2016, Month.DECEMBER, 5), 18 + 15)
+      )
+
+      Statistics.totalNumberOfCarsByDate(timeFrames) should be(expected)
+    }
+
+    it("should return empty list for empty list") {
+      Statistics.totalNumberOfCarsByDate(List.empty) should be(List.empty)
     }
   }
 }
