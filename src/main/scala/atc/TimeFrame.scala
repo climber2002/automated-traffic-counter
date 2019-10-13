@@ -24,20 +24,20 @@ object TimeFrame {
     Duration.between(frame1.startTime, frame2.startTime).toMinutes == 30
 
   /**
-   * Convert a list of time frames to a list of sub TimeFrames, each sub TimeFrames has exact subFramesSize of
-   * TimeFrames from the timeFrames param
+   * Convert a list of TimeFrames to a list of sub TimeFrames, each sub TimeFrames list is a sublist of the timeFrames
+   * param and has exact subFramesSize TimeFrames
    *
    * @param timeFrames
    * @param subFramesSize
    * @return
    */
   def convertToSubFramesOfSize(timeFrames: List[TimeFrame], subFramesSize: Int): List[List[TimeFrame]] = {
-    val subFrames = timeFrames match {
+    val subFramesList = timeFrames match {
       case _ :: tail => timeFrames.take(subFramesSize) :: convertToSubFramesOfSize(tail, subFramesSize)
       case Nil => List.empty[List[TimeFrame]]
     }
 
-    subFrames.filter(_.length == subFramesSize)
+    subFramesList.filter(_.length == subFramesSize)
   }
 
 }
