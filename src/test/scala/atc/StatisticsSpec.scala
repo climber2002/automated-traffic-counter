@@ -72,4 +72,12 @@ class StatisticsSpec extends FunSpec with Matchers {
       Statistics.topTimeFramesWithMostCars(timeFrames, 3) should be(expected)
     }
   }
+
+  describe("contiguousFramesWithLeastCars") {
+    it("should return correct result for a list of TimeFrames") {
+      val expected = (LocalDateTime.of(2016, Month.DECEMBER, 1, 6, 30), 15 + 25 + 46)
+
+      Statistics.contiguousFramesWithLeastCars(timeFrames, 3) should be(expected)
+    }
+  }
 }

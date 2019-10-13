@@ -18,4 +18,69 @@ class TimeFrameSpec extends FunSpec with Matchers {
       timeFrame.date should be(LocalDate.of(2016, Month.DECEMBER, 1))
     }
   }
+
+  describe("TimeFrame.isContiguous") {
+    it("should return true if the list is empty") {
+      TimeFrame.isContiguous(List.empty) should be(true)
+    }
+
+    it("should return true if the list has only one TimeFrame") {
+      val timeFrames = List(TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 5, 0), 5))
+      TimeFrame.isContiguous(timeFrames) should be(true)
+    }
+
+    it("should return true if the list has contiguous TimeFrames") {
+      val timeFrames = List(
+        TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 5, 0), 5),
+        TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 5, 30), 0),
+        TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 6, 0), 10),
+        TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 6, 30), 20),
+      )
+
+      TimeFrame.isContiguous(timeFrames) should be(true)
+    }
+
+    it("should return false if the TimeFrames are not contiguous") {
+      val timeFrames = List(
+        TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 5, 0), 5),
+        TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 6, 0), 10),
+        TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 6, 30), 20),
+      )
+
+      TimeFrame.isContiguous(timeFrames) should be(false)
+    }
+  }
+
+  describe("TimeFrame.convertToSubFrames") {
+    it("returns a list of lists, each list is the first N TimeFrames") {
+      val timeFrames = List(
+        TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 5, 0), 5),
+        TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 5, 30), 0),
+        TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 6, 0), 10),
+        TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 6, 30), 20)
+      )
+
+      val expected = List(
+        List(
+          TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 5, 0), 5),
+          TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 5, 30), 0),
+          TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 6, 0), 10)
+        ),
+        List(
+          TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 5, 30), 0),
+          TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 6, 0), 10),
+          TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 6, 30), 20)
+        ),
+        List(
+          TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 6, 0), 10),
+          TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 6, 30), 20)
+        ),
+        List(
+          TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 6, 30), 20)
+        )
+      )
+
+      TimeFrame.convertToSubFrames(timeFrames, 3) should be(expected)
+    }
+  }
 }
