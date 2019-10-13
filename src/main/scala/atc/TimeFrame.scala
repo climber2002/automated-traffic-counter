@@ -15,14 +15,13 @@ object TimeFrame {
    * @return
    */
   def isContiguous(timeFrames: List[TimeFrame]): Boolean = timeFrames match {
-    case frame1 :: frame2 :: tail =>
-      if (Duration.between(frame1.startTime, frame2.startTime).toMinutes == 30) {
-        isContiguous(frame2 :: tail)
-      } else {
-        false
-      }
+    case frame1 :: frame2 :: tail if isContiguous(frame1, frame2) => isContiguous(frame2 :: tail)
+    case frame1 :: frame2 :: _ if !isContiguous(frame1, frame2) => false
     case _ => true
   }
+
+  private def isContiguous(frame1: TimeFrame, frame2: TimeFrame): Boolean =
+    Duration.between(frame1.startTime, frame2.startTime).toMinutes == 30
 
   /**
    * Convert a list of time frames to a list of sub TimeFrames, each sub TimeFrames has exact subFramesSize of
