@@ -32,9 +32,9 @@ object TimeFrame {
    * @param subFramesSize
    * @return
    */
-  def convertToSubFramesWithSize(timeFrames: List[TimeFrame], subFramesSize: Int): List[List[TimeFrame]] = {
+  def convertToSubFramesOfSize(timeFrames: List[TimeFrame], subFramesSize: Int): List[List[TimeFrame]] = {
     val subFrames = timeFrames match {
-      case _ :: tail => timeFrames.take(subFramesSize) :: convertToSubFramesWithSize(tail, subFramesSize)
+      case _ :: tail => timeFrames.take(subFramesSize) :: convertToSubFramesOfSize(tail, subFramesSize)
       case Nil => List.empty[List[TimeFrame]]
     }
 
