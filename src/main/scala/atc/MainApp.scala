@@ -13,6 +13,7 @@ object MainApp extends App {
   printTotalNumberOfCarsByDate(timeFrames)
   printTop3HalfHoursWithMostCars(timeFrames)
   printOneAndAHalfHourPeriodWithLeastCars(timeFrames)
+  println("")
 
   private def printTotalNumberOfCars(timeFrames: List[TimeFrame]) = {
     val totalCount = Statistics.totalNumberOfCars(timeFrames)
