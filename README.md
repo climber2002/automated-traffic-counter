@@ -1,7 +1,7 @@
 Introduction
 ------------
 
-This is a Scala Solution to AIPS Coding Challenge. It's a standard sbt project. Firstly make sure (SBT)(https://www.scala-sbt.org/) is installed. And then after extracting the zip file, `cd` to the project folder and run `sbt run`, it will read the sample file `src/main/resources/timeFrames.txt` and give following outputs,
+This is a Scala Solution to AIPS Coding Challenge. It's a standard sbt project. Firstly make sure [SBT](https://www.scala-sbt.org/) is installed. And then after extracting the zip file, `cd` to the project folder and run `sbt run`, it will read the sample file `src/main/resources/timeFrames.txt` and give following outputs,
 
 ```
 The number of cars seen in total is 398
@@ -25,7 +25,7 @@ The 1.5 hour period with least cars starts from 2016-12-01T05:00:00, and the tot
 
 This solution made following assumptions:
 1. The timestamp of entries in the file is in an increasing order.
-2. When calculating the 1.5 hour period with least cars, it will calculate *exact* 1.5 hours. In the file if the contiguous lines span less than 1.5 hours, the program will ignore the lines.
+2. When calculating the 1.5 hour period with least cars, it will calculate ***exact*** 1.5 hours. In the file if the contiguous lines span less than 1.5 hours (for example the last line in the file `2016-12-09T00:00:00 4`), the program will ignore the lines.
 
 The program has a suite of auto tests using `scalatest`, run `sbt test` to run the full test suite.
 
