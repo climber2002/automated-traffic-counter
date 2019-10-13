@@ -7,4 +7,7 @@ object Statistics {
 
   def totalNumberOfCarsByDate(timeFrames: List[TimeFrame]): List[(LocalDate, Int)] =
     timeFrames.groupBy(_.date).mapValues(totalNumberOfCars(_)).toList
+
+  def topTimeFramesWithMostCars(timeFrames: List[TimeFrame], topN: Int) =
+    timeFrames.sortBy(_.count)(Ordering[Int].reverse).take(topN)
 }

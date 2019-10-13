@@ -45,4 +45,31 @@ class StatisticsSpec extends FunSpec with Matchers {
       Statistics.totalNumberOfCarsByDate(List.empty) should be(List.empty)
     }
   }
+
+  describe("topTimeFramesWithMostCars") {
+    it("should return the top N TimeFrames with most cars") {
+      val n = 3
+      val expected = List(
+        TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 7, 30), 46),
+        TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 8, 0), 42),
+        TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 7, 0), 25)
+      )
+
+      Statistics.topTimeFramesWithMostCars(timeFrames, n) should be(expected)
+    }
+
+    it("should return all TimeFrames sorted if the topN is larger than the size of TimeFrames list") {
+      val timeFrames = List(
+        TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 7, 0), 25),
+        TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 7, 30), 46)
+      )
+
+      val expected = List(
+        TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 7, 30), 46),
+        TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 7, 0), 25)
+      )
+
+      Statistics.topTimeFramesWithMostCars(timeFrames, 3) should be(expected)
+    }
+  }
 }
