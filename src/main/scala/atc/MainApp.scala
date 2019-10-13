@@ -34,9 +34,12 @@ object MainApp extends App {
   }
 
   private def printOneAndAHalfHourPeriodWithLeastCars(timeFrames: List[TimeFrame]) = {
-    val (startTime, count) = Statistics.contiguousFramesWithLeastCars(timeFrames, 3)
+    val contiguousFrames = Statistics.contiguousFramesWithLeastCars(timeFrames, 3)
+    val startFrame = contiguousFrames.head
+    val totalCars = Statistics.totalNumberOfCars(contiguousFrames)
 
-    println(s"\nThe 1.5 hour period with least cars starts from ${formatDateTime(startTime)}, and the total number of cars is ${count}")
+    println(s"\nThe 1.5 hour period with least cars starts from ${formatDateTime(startFrame.startTime)}, and the total number of cars is ${totalCars}: ")
+    contiguousFrames.foreach(timeFrame => println(s"${formatDateTime(timeFrame.startTime)} ${timeFrame.count}"))
   }
 
   private def formatDate(date: LocalDate): String = date.format(DateTimeFormatter.ISO_DATE)

@@ -12,10 +12,9 @@ object Statistics {
   def topTimeFramesWithMostCars(timeFrames: List[TimeFrame], topN: Int) =
     timeFrames.sortBy(_.count)(Ordering[Int].reverse).take(topN)
 
-  def contiguousFramesWithLeastCars(timeFrames: List[TimeFrame], framesCount: Int): (LocalDateTime, Int) =
+  def contiguousFramesWithLeastCars(timeFrames: List[TimeFrame], framesCount: Int): List[TimeFrame] =
     TimeFrame.convertToSubFramesOfSize(timeFrames, framesCount)
       .filter(TimeFrame.isContiguous(_))
-      .map(subFrames => (subFrames.head.startTime, totalNumberOfCars(subFrames)))
-      .sortBy(_._2)
+      .sortBy(subFrames => totalNumberOfCars(subFrames))
       .head
 }

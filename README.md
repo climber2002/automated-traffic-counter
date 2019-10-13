@@ -17,7 +17,10 @@ The top 3 half hours with most cars:
 2016-12-01T08:00:00 42
 2016-12-08T18:00:00 33
 
-The 1.5 hour period with least cars starts from 2016-12-01T05:00:00, and the total number of cars is 31
+The 1.5 hour period with least cars starts from 2016-12-01T05:00:00, and the total number of cars is 31:
+2016-12-01T05:00:00 5
+2016-12-01T05:30:00 12
+2016-12-01T06:00:00 14
 ```
 
 This solution made following assumptions:

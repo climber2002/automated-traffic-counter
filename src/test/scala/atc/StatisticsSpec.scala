@@ -75,7 +75,11 @@ class StatisticsSpec extends FunSpec with Matchers {
 
   describe("contiguousFramesWithLeastCars") {
     it("should return correct result for a list of TimeFrames") {
-      val expected = (LocalDateTime.of(2016, Month.DECEMBER, 1, 6, 30), 15 + 25 + 46)
+      val expected = List(
+        TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 6, 30), 15),
+        TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 7, 0), 25),
+        TimeFrame(LocalDateTime.of(2016, Month.DECEMBER, 1, 7, 30), 46),
+      )
 
       Statistics.contiguousFramesWithLeastCars(timeFrames, 3) should be(expected)
     }
