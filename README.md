@@ -1,7 +1,7 @@
 Introduction
 ------------
 
-This is a Scala Solution to AIPS Coding Challenge. It's a standard sbt project. Firstly make sure [SBT](https://www.scala-sbt.org/) is installed. And then after extracting the zip file, `cd` to the project folder and run `sbt run`, it will read the sample file `src/main/resources/timeFrames.txt` and give following outputs,
+This is a Scala Solution to AIPS Coding Challenge created by Andy Wang. It's a standard sbt project. Firstly make sure [SBT](https://www.scala-sbt.org/) is installed. And then after extracting the zip file, `cd` to the project folder and run `sbt run`, it will read the sample file `src/main/resources/timeFrames.txt` and give following outputs,
 
 ```
 The number of cars seen in total is 398
